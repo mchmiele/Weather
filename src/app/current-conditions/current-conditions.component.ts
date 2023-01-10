@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-current-conditions',
   templateUrl: './current-conditions.component.html',
-  styleUrls: ['./current-conditions.component.css']
+  styleUrls: ['./current-conditions.component.scss']
 })
 export class CurrentConditionsComponent {
 

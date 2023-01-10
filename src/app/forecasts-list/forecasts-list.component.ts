@@ -5,7 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-forecasts-list',
   templateUrl: './forecasts-list.component.html',
-  styleUrls: ['./forecasts-list.component.css']
+  styleUrls: ['./forecasts-list.component.scss']
 })
 export class ForecastsListComponent {
 
