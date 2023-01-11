@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Country } from 'app/shared/models/country';
+import { COUNTRIES } from 'app/shared/const/countries'
 
 @Component({
     selector: 'app-country-entry',
@@ -9,13 +11,11 @@ export class CountryEntryComponent {
 
     @Output() selectCountry = new EventEmitter<string>();
 
-    countries: Country[] = countries;
+    countries: Country[] = COUNTRIES;
     searchValue: string;
     selectedCountry: Country;
     dropdownClosed: boolean = false;
     filteredCountries: Country[];
-
-    constructor() { }
     
     get searchValueEmpty() {
         return this.searchValue === undefined || this.searchValue === '' || this.searchValue === ' ';
@@ -32,7 +32,7 @@ export class CountryEntryComponent {
         this.searchValue = country.name;
         this.selectedCountry = country;
         this.dropdownClosed = true;
-        this.selectCountry.emit(this.selectedCountry.countryCode);
+        this.selectCountry.emit(this.selectedCountry.code);
     }
 
     onFilterChange() {
@@ -58,20 +58,3 @@ export class CountryEntryComponent {
       }
 
 }
-
-export class Country{
-    countryCode: string;
-    name: string;
-    displayName?: string;
-}
-
-export class CountryNamePart {
-    isBolted: boolean;
-    namePart: string;
-}
-
-const countries: Country[] = [
-    { countryCode: 'PL', name: 'Poland' },
-    { countryCode: 'US', name: 'USA' },
-    { countryCode: 'UK', name: 'United Kingdom' },
-]
