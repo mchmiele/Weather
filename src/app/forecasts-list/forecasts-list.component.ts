@@ -16,16 +16,20 @@ export class ForecastsListComponent {
     forecast: Forecast;
 
     constructor(
-        private weatherService: WeatherService, 
+        private weatherService: WeatherService,
         weatherApiService: WeatherApiService,
         route: ActivatedRoute) {
         route.params.subscribe(params => {
             this.zipcode = params['zipcode'];
             this.countryCode = params['countryCode'];
             weatherApiService.getForecast(this.zipcode, this.countryCode)
-                .subscribe(data => {
-                    this.forecast = data;
-                });
+                .subscribe(
+                    data => {
+                        this.forecast = data;
+                    },
+                    err => {
+                        window.alert(`Error while getting forecast for zipCode: ${this.zipcode} and country: ${this.countryCode} `);
+                    });
         });
     }
 

@@ -15,7 +15,7 @@ export class ConditionComponent implements OnInit, OnDestroy {
 
     @Input() zipCode: string;
     @Input() countryCode: string;
-    
+
     subscription: Subscription = new Subscription();
     currentCondition: Condition;
     refreshTime: number = 30000;
@@ -41,10 +41,15 @@ export class ConditionComponent implements OnInit, OnDestroy {
     }
 
     getCurrentCondition() {
-        if (this.zipCode) {
-            this.subscription.add(this.weatherApiService.getCurrentConditions(this.zipCode, this.countryCode).subscribe(v => {
-                this.currentCondition = v;
-            }));
+        if (this.zipCode && this.countryCode) {
+            this.subscription.add(this.weatherApiService.getCurrentConditions(this.zipCode, this.countryCode).subscribe(
+                v => {
+                    this.currentCondition = v;
+                },
+                err => {
+                    window.alert(`Error while getting condition for zipCode: ${this.zipCode} and country: ${this.countryCode} `)
+                }
+            ));
         }
     }
 
