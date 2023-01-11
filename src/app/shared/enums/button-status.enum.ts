@@ -1,4 +1,4 @@
-export enum LocationStatus {
+export enum ButtonStatus {
     Default,
     Working,
     Done

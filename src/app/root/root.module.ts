@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { RootComponent } from './root.component';
-import { ZipcodeEntryComponent } from './../zipcode-entry/zipcode-entry.component';
+import { LocationEntryComponent } from '../zipcode-entry/location-entry.component';
 import { LocationService } from "../shared/services/location.service";
 import { ForecastsListComponent } from './../forecasts-list/forecasts-list.component';
 import { WeatherService } from "../shared/services/weather.service";
@@ -21,7 +21,7 @@ import { StatusButtonComponent } from 'app/status-button/status-button.component
 @NgModule({
     declarations: [
         RootComponent,
-        ZipcodeEntryComponent,
+        LocationEntryComponent,
         ForecastsListComponent,
         CurrentConditionsComponent,
         ConditionComponent,

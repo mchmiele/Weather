@@ -2,7 +2,7 @@
   <h2>Enter a zipcode:</h2>
   <input type="text" [(ngModel)]="zipCode" placeholder="Zipcode" class="form-control">
   <br>
-  <app-status-button [zipCode]="zipCode">
+  <app-status-button [zipCode]="zipCode" (buttonClick)="onClick($event)">
     <div state="default" class="button default">Add Location</div>
     <div state="working" class="button working">Adding...</div>
     <div state="done" class="button done">Saved</div>

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Location } from '../models/location';
+import {ButtonStatus} from '../enums/button-status.enum'
 
 export const LOCATIONS: string = "locations";
 
 @Injectable()
 export class LocationService {
 
-    locationProcess: Subject<string> = new Subject();
+    locationProcess: Subject<ButtonStatus> = new Subject();
     locations: Location[] = [];
 
     constructor() {
@@ -24,8 +25,8 @@ export class LocationService {
         setTimeout(() => {
             this.locations.push(location);
             localStorage.setItem(LOCATIONS, JSON.stringify(this.locations));
-            this.locationProcess.next('done');
-        }, 500) // timeout on purpose to demonstrate the middle-state: working
+            this.locationProcess.next(ButtonStatus.Done);
+        }, 1000) // timeout on purpose to demonstrate the middle-state: working
     }
 
     removeLocation(zipCode: string) {

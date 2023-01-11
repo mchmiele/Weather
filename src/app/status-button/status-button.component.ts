@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { LocationStatus } from 'app/shared/enums/location-status.enum';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ButtonStatus } from 'app/shared/enums/button-status.enum';
 import { LocationService } from 'app/shared/services/location.service';
 import { interval, Subscription, zip } from 'rxjs';
 
@@ -8,13 +8,14 @@ import { interval, Subscription, zip } from 'rxjs';
     templateUrl: './status-button.component.html',
     styleUrls: ['./status-button.component.scss']
 })
-export class StatusButtonComponent implements OnInit {
+export class StatusButtonComponent implements OnInit, OnDestroy {
 
     @Input() zipCode: string;
+    @Output() buttonClick = new EventEmitter<ButtonStatus>();
 
-    locationStatus: LocationStatus;
+    buttonStatus: ButtonStatus;
 
-    locationProgressSubscription: Subscription;
+    locationProgressSubscription: Subscription = new Subscription();
     intervalSubscription: Subscription = new Subscription();
 
     resetButtonInterval = 2000; // reset button interval on purpose increased from 500ms (as in the instruction) to present properly all states and behaviours
@@ -22,58 +23,50 @@ export class StatusButtonComponent implements OnInit {
     constructor(private locationService: LocationService) { }
 
     ngOnInit(): void {
-        this.locationStatus = LocationStatus.Default;
+        this.buttonStatus = ButtonStatus.Default;
     }
 
-    addLocation() {
-        if (!this.zipCode) {
-            window.alert('ZipCode cannot be empty');
-            return;
-        }
+    ngOnDestroy(): void {
+        this.locationProgressSubscription.unsubscribe();
+        this.intervalSubscription.unsubscribe();
+    }
 
+    onClick() {
         this.addButtonStatusChangeSubscription();
-        this.addResetButtonInterval();
 
-        this.locationService.locationProcess.next("working");
-        this.locationService.addLocation({ zipCode: this.zipCode });
+        this.buttonClick.emit(this.buttonStatus);
+
+        this.addResetButtonInterval();
     }
 
     addButtonStatusChangeSubscription() {
         this.locationProgressSubscription = this.locationService.locationProcess.subscribe(v => {
-            if (v == 'default') {
-                this.locationStatus = LocationStatus.Default;
-            }
-
-            if (v == 'working') {
-                this.locationStatus = LocationStatus.Working;
-            }
-
-            if (v == 'done') {
-                this.locationStatus = LocationStatus.Done;
-            }
+            console.log(v);
+            this.buttonStatus = v;
         });
     }
 
     addResetButtonInterval() {
-        this.intervalSubscription.add(interval(this.resetButtonInterval).subscribe(() => {
+        this.intervalSubscription = interval(this.resetButtonInterval).subscribe(() => {
             this.resetButton();
-        }));
+        });
     }
 
     resetButton() {
         this.locationProgressSubscription.unsubscribe();
-        this.locationStatus = LocationStatus.Default;
+        this.intervalSubscription.unsubscribe();
+        this.buttonStatus = ButtonStatus.Default;
     }
 
     showAddButton(): boolean {
-        return this.locationStatus === LocationStatus.Default;
+        return this.buttonStatus === ButtonStatus.Default;
     }
 
     showWorkingButton(): boolean {
-        return this.locationStatus === LocationStatus.Working;
+        return this.buttonStatus === ButtonStatus.Working;
     }
 
     showDoneButton(): boolean {
-        return this.locationStatus === LocationStatus.Done;
+        return this.buttonStatus === ButtonStatus.Done;
     }
 }
