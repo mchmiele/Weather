@@ -48,10 +48,6 @@ export class ConditionComponent implements OnInit, OnDestroy {
         }
     }
 
-    showForecast(zipcode: string) {
-        this.router.navigate(['/forecast', zipcode])
-    }
-
     getWeatherIcon(id: any): string {
         return this.weatherService.getWeatherIcon(id);
     }
