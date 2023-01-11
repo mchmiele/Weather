@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from 'app/shared/models/location';
 import { LocationService } from 'app/shared/services/location.service';
 

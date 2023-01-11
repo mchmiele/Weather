@@ -14,6 +14,7 @@ import { Condition } from 'app/shared/models/api/responses/condition';
 export class ConditionComponent implements OnInit, OnDestroy {
 
     @Input() zipCode: string;
+    @Input() countryCode: string;
     
     subscription: Subscription = new Subscription();
     currentCondition: Condition;
@@ -41,7 +42,7 @@ export class ConditionComponent implements OnInit, OnDestroy {
 
     getCurrentCondition() {
         if (this.zipCode) {
-            this.subscription.add(this.weatherApiService.getCurrentConditions(this.zipCode).subscribe(v => {
+            this.subscription.add(this.weatherApiService.getCurrentConditions(this.zipCode, this.countryCode).subscribe(v => {
                 this.currentCondition = v;
             }));
         }

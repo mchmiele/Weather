@@ -41,7 +41,6 @@ export class StatusButtonComponent implements OnInit, OnDestroy {
 
     addButtonStatusChangeSubscription() {
         this.locationProgressSubscription = this.locationService.locationProcess.subscribe(v => {
-            console.log(v);
             this.buttonStatus = v;
         });
     }

@@ -17,11 +17,13 @@ import { environment } from '../../environments/environment';
 import { WeatherApiService } from 'app/shared/services/api/weather-api.service';
 import { ConditionComponent } from 'app/condition/condition.component';
 import { StatusButtonComponent } from 'app/status-button/status-button.component';
+import { CountryEntryComponent } from 'app/country-entry/country-entry.component';
 
 @NgModule({
     declarations: [
         RootComponent,
         LocationEntryComponent,
+        CountryEntryComponent,
         ForecastsListComponent,
         CurrentConditionsComponent,
         ConditionComponent,

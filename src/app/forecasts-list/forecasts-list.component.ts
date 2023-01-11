@@ -12,6 +12,7 @@ import { WeatherApiService } from 'app/shared/services/api/weather-api.service';
 export class ForecastsListComponent {
 
     zipcode: string;
+    countryCode: string;
     forecast: Forecast;
 
     constructor(
@@ -20,7 +21,8 @@ export class ForecastsListComponent {
         route: ActivatedRoute) {
         route.params.subscribe(params => {
             this.zipcode = params['zipcode'];
-            weatherApiService.getForecast(this.zipcode)
+            this.countryCode = params['countryCode'];
+            weatherApiService.getForecast(this.zipcode, this.countryCode)
                 .subscribe(data => {
                     this.forecast = data;
                 });

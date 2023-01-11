@@ -9,8 +9,13 @@ import { LocationService } from 'app/shared/services/location.service';
 })
 export class LocationEntryComponent {
     zipCode: string;
+    countryCode: string;
 
     constructor(private locationService: LocationService) { }
+
+    onCountrySelect(countryCode: string) {
+        this.countryCode = countryCode;
+    }
 
     onClick(buttonStatus: ButtonStatus) {
         if (buttonStatus !== ButtonStatus.Default) {
@@ -23,7 +28,7 @@ export class LocationEntryComponent {
         }
 
         this.locationService.locationProcess.next(ButtonStatus.Working);
-        this.locationService.addLocation({ zipCode: this.zipCode });
+        this.locationService.addLocation({ zipCode: this.zipCode, countryCode: this.countryCode });
         this.zipCode = '';
     }
 }

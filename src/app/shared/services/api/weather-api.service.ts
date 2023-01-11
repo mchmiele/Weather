@@ -13,12 +13,12 @@ export class WeatherApiService {
 
     constructor(private http: HttpClient) { }
 
-    getCurrentConditions(zipcode: string): Observable<Condition> {
-        return this.http.get<Condition>(`${WeatherApiService.URL}/weather?zip=${zipcode},us&units=imperial&APPID=${WeatherApiService.APPID}`);
+    getCurrentConditions(zipcode: string, countryCode: string): Observable<Condition> {
+        return this.http.get<Condition>(`${WeatherApiService.URL}/weather?zip=${zipcode},${countryCode}&units=imperial&APPID=${WeatherApiService.APPID}`);
     }
 
-    getForecast(zipcode: string): Observable<Forecast> {
-        return this.http.get<Forecast>(`${WeatherApiService.URL}/forecast/daily?zip=${zipcode},us&units=imperial&cnt=5&APPID=${WeatherApiService.APPID}`);
+    getForecast(zipcode: string, countryCode: string): Observable<Forecast> {
+        return this.http.get<Forecast>(`${WeatherApiService.URL}/forecast/daily?zip=${zipcode},${countryCode}&units=imperial&cnt=5&APPID=${WeatherApiService.APPID}`);
     }
 
 }
