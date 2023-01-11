@@ -1,0 +1,15 @@
+.status-button {
+    padding: 0;
+    display: block;
+    border: none;
+
+    width: 200px;
+    height: 50px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.disabled-button {
+    pointer-events: none;
+    cursor: not-allowed;
+}

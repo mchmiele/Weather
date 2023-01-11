@@ -1,0 +1,23 @@
+.dropdown {
+    background-color: #f6f6f6;
+    z-index: 1;
+}
+
+.dropdown-content {
+    position: relative;
+    background-color: white;
+    overflow: auto;
+    position: absolute;
+}
+
+.dropdown-item {
+    color: black;
+    background-color: white;
+    padding: 12px 16px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    color: white;
+    background-color: cornflowerblue;
+}

@@ -1,0 +1,13 @@
+<div class="well entry-container">
+  <h2>Enter a zipcode:</h2>
+  <input type="text" [(ngModel)]="zipCode" placeholder="Zipcode" class="form-control">
+  <br>
+  <h2>Enter a country:</h2>
+  <app-country-entry (selectCountry)="onCountrySelect($event)"></app-country-entry>
+  <br>
+  <app-status-button [zipCode]="zipCode" (buttonClick)="onClick($event)">
+    <div state="default" class="button default">Add Location</div>
+    <div state="working" class="button working">Adding...</div>
+    <div state="done" class="button done">Saved</div>
+  </app-status-button>
+</div>

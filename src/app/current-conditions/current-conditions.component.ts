@@ -1,23 +1,24 @@
-import { Component } from '@angular/core';
-import {WeatherService} from "../weather.service";
-import {LocationService} from "../location.service";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Location } from 'app/shared/models/location';
+import { LocationService } from 'app/shared/services/location.service';
 
 @Component({
-  selector: 'app-current-conditions',
-  templateUrl: './current-conditions.component.html',
-  styleUrls: ['./current-conditions.component.css']
+    selector: 'app-current-conditions',
+    templateUrl: './current-conditions.component.html',
+    styleUrls: ['./current-conditions.component.scss']
 })
-export class CurrentConditionsComponent {
+export class CurrentConditionsComponent implements OnInit {
 
-  constructor(private weatherService : WeatherService, private locationService : LocationService, private router : Router) {
-  }
+    locations: Location[] = [];
 
-  getCurrentConditions() {
-    return this.weatherService.getCurrentConditions();
-  }
+    constructor(private locationService: LocationService) {
+    }
+    
+    ngOnInit(): void {
+        this.getCurrentConditions();
+    }
 
-  showForecast(zipcode : string){
-    this.router.navigate(['/forecast', zipcode])
-  }
+    getCurrentConditions() {
+        this.locations = this.locationService.getCurrentLocations();
+    }
 }
