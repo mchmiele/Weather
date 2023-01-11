@@ -37,13 +37,37 @@ export class CountryEntryComponent {
 
     onFilterChange() {
         this.filteredCountries = this.countries.filter(c => c.name.toLocaleUpperCase().includes(this.searchValue.toLocaleUpperCase()));
+
+        if (!this.searchValueEmpty) {
+            this.filteredCountries.forEach(c => {
+                c.displayName = this.boldString(c.name, this.searchValue);
+            })
+        }
+        
     }
+
+    boldString(fullString: string, boldSubstring: string): string {
+        var strRegExp = new RegExp(boldSubstring, 'gi');
+
+        let indexOfSubstring = fullString.toLocaleUpperCase().indexOf(boldSubstring.toLocaleUpperCase());
+        let substringToBold = fullString.substring(indexOfSubstring, boldSubstring.length);
+
+        var boldedString = fullString.replace(strRegExp, '<b>'+substringToBold+'</b>');
+        
+        return boldedString;
+      }
 
 }
 
 export class Country{
     countryCode: string;
     name: string;
+    displayName?: string;
+}
+
+export class CountryNamePart {
+    isBolted: boolean;
+    namePart: string;
 }
 
 const countries: Country[] = [
