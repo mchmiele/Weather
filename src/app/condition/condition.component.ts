@@ -40,9 +40,11 @@ export class ConditionComponent implements OnInit, OnDestroy {
     }
 
     getCurrentCondition() {
-        this.subscription.add(this.weatherApiService.getCurrentConditions(this.zipCode).subscribe(v => {
-            this.currentCondition = v;
-        }));
+        if (this.zipCode) {
+            this.subscription.add(this.weatherApiService.getCurrentConditions(this.zipCode).subscribe(v => {
+                this.currentCondition = v;
+            }));
+        }
     }
 
     showForecast(zipcode: string) {

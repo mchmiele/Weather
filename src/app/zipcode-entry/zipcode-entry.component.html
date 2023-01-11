@@ -1,8 +1,10 @@
 <div class="well">
   <h2>Enter a zipcode:</h2>
-  <input type="text" #zipcode placeholder="Zipcode" class="form-control">
+  <input type="text" [(ngModel)]="zipCode" placeholder="Zipcode" class="form-control">
   <br>
-  <button class="btn btn-primary" (click)="addLocation(zipcode.value)" >
-    Add location
-  </button>
+  <app-status-button [zipCode]="zipCode">
+    <div state="default" class="button default">Add Location</div>
+    <div state="working" class="button working">Adding...</div>
+    <div state="done" class="button done">Saved</div>
+  </app-status-button>
 </div>

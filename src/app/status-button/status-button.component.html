@@ -1,0 +1,5 @@
+<div class="btn status-button" (click)="addLocation()">
+    <ng-content *ngIf="showAddButton()" select="[state=default]"></ng-content>
+    <ng-content *ngIf="showWorkingButton()" select="[state=working]"></ng-content>
+    <ng-content *ngIf="showDoneButton()" select="[state=done]"></ng-content>
+</div>

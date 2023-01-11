@@ -16,6 +16,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../../environments/environment';
 import { WeatherApiService } from 'app/shared/services/api/weather-api.service';
 import { ConditionComponent } from 'app/condition/condition.component';
+import { StatusButtonComponent } from 'app/status-button/status-button.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { ConditionComponent } from 'app/condition/condition.component';
         ForecastsListComponent,
         CurrentConditionsComponent,
         ConditionComponent,
-        MainPageComponent
+        MainPageComponent,
+        StatusButtonComponent
     ],
     imports: [
         BrowserModule,
