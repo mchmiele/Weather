@@ -27,6 +27,11 @@ export class LocationEntryComponent {
             return;
         }
 
+        if (!this.countryCode) {
+            window.alert('Country cannot be empty');
+            return;
+        }
+
         this.locationService.locationProcess.next(ButtonStatus.Working);
         this.locationService.addLocation({ zipCode: this.zipCode, countryCode: this.countryCode });
         this.zipCode = '';

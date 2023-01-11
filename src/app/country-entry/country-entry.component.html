@@ -3,4 +3,7 @@
     <div *ngIf="!searchValueEmpty && !dropdownClosed" class="dropdown-content">
         <div *ngFor="let country of filteredCountries" class="dropdown-item" (click)="onCountrySelected(country)" [innerHTML]="country.displayName"> </div>
     </div>
+    <div class="selectedCountry">
+        <b>Selected country:</b>  <span *ngIf="selectedCountry"> {{ selectedCountry.name }} </span>
+    </div>
 </div>
