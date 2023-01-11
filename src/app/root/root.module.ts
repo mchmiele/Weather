@@ -15,6 +15,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../../environments/environment';
 import { WeatherApiService } from 'app/shared/services/api/weather-api.service';
+import { ConditionComponent } from 'app/condition/condition.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { WeatherApiService } from 'app/shared/services/api/weather-api.service';
         ZipcodeEntryComponent,
         ForecastsListComponent,
         CurrentConditionsComponent,
+        ConditionComponent,
         MainPageComponent
     ],
     imports: [

@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
-import {WeatherService} from "./weather.service";
+import { Location } from '../models/location';
 
-export const LOCATIONS : string = "locations";
+export const LOCATIONS: string = "locations";
 
 @Injectable()
 export class LocationService {
 
-  zipCodes : string[] = [];
+    locations: Location[] = [];
 
-  constructor(private weatherService : WeatherService) {
-    let locString = localStorage.getItem(LOCATIONS);
-    if (locString)
-      this.zipCodes = JSON.parse(locString);
-    for (let loc of this.zipCodes)
-      this.weatherService.addCurrentConditions(loc);
-  }
-
-  addLocation(zipcode : string){
-    this.zipCodes.push(zipcode);
-    localStorage.setItem(LOCATIONS, JSON.stringify(this.zipCodes));
-    this.weatherService.addCurrentConditions(zipcode);
-  }
-
-  removeLocation(zipcode : string){
-    let index = this.zipCodes.indexOf(zipcode);
-    if (index !== -1){
-      this.zipCodes.splice(index, 1);
-      localStorage.setItem(LOCATIONS, JSON.stringify(this.zipCodes));
-      this.weatherService.removeCurrentConditions(zipcode);
+    constructor() {
+        let locString = localStorage.getItem(LOCATIONS);
+        if (locString)
+            this.locations = JSON.parse(locString);
     }
-  }
+
+    getCurrentLocations(): Location[] {
+        return this.locations;
+    }
+
+    addLocation(location: Location) {
+        this.locations.push(location);
+        localStorage.setItem(LOCATIONS, JSON.stringify(this.locations));
+    }
+
+    removeLocation(zipCode: string) {
+        let index = this.locations.findIndex(location => location.zipCode == zipCode);
+        if (index !== -1) {
+            this.locations.splice(index, 1);
+            localStorage.setItem(LOCATIONS, JSON.stringify(this.locations));
+        }
+    }
 }

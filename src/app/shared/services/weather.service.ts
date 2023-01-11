@@ -1,37 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CurrentCondition } from 'app/shared/models/api/responses/current-condition';
-import { WeatherApiService } from './api/weather-api.service';
 
 @Injectable()
 export class WeatherService {
-
-    static URL = 'http://api.openweathermap.org/data/2.5';
-    static APPID = '5a4b2d457ecbef9eb2a71e480b947604';
     static ICON_URL = 'https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-hdpi/';
-    private currentConditions: CurrentCondition[] = [];
-
-    constructor(private weatherApiService: WeatherApiService) { }
-
-    addCurrentConditions(zipcode: string): void {
-        this.weatherApiService.getCurrentConditions(zipcode)
-            .subscribe(data => {
-                this.currentConditions.push({
-                    zipCode: zipcode,
-                    data: data
-                });
-            });
-    }
-
-    removeCurrentConditions(zipcode: string) {
-        for (let i in this.currentConditions) {
-            if (this.currentConditions[i].zipCode == zipcode)
-                this.currentConditions.splice(+i, 1);
-        }
-    }
-
-    getCurrentConditions(): CurrentCondition[] {
-        return this.currentConditions;
-    }
 
     getWeatherIcon(id) {
         if (id >= 200 && id <= 232)
