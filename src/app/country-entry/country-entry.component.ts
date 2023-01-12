@@ -47,12 +47,12 @@ export class CountryEntryComponent {
     }
 
     boldString(fullString: string, boldSubstring: string): string {
-        var strRegExp = new RegExp(boldSubstring, 'gi');
-
         let indexOfSubstring = fullString.toLocaleUpperCase().indexOf(boldSubstring.toLocaleUpperCase());
-        let substringToBold = fullString.substring(indexOfSubstring, boldSubstring.length);
+        let substringToBold = fullString.substring(indexOfSubstring, indexOfSubstring + boldSubstring.length);
 
-        var boldedString = fullString.replace(strRegExp, '<b>'+substringToBold+'</b>');
+        console.log(indexOfSubstring);
+        console.log(substringToBold);
+        var boldedString = fullString.replace(substringToBold, '<b>'+substringToBold+'</b>');
         
         return boldedString;
       }
