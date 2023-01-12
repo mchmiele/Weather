@@ -50,8 +50,6 @@ export class CountryEntryComponent {
         let indexOfSubstring = fullString.toLocaleUpperCase().indexOf(boldSubstring.toLocaleUpperCase());
         let substringToBold = fullString.substring(indexOfSubstring, indexOfSubstring + boldSubstring.length);
 
-        console.log(indexOfSubstring);
-        console.log(substringToBold);
         var boldedString = fullString.replace(substringToBold, '<b>'+substringToBold+'</b>');
         
         return boldedString;
